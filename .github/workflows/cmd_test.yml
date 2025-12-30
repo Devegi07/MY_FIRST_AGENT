@@ -21,7 +21,7 @@ jobs:
       - name: Check if file exists and create if not
         shell: cmd
         run: |
-          if exist agent_data\info.txt (
+          if exist agent_data1\info.txt (
             echo File already exists. Skipping creation and commit.
             exit /b 0
           )
