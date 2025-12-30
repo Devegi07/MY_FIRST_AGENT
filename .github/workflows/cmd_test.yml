@@ -21,12 +21,12 @@ jobs:
       - name: Check if file exists and create if not
         shell: cmd
         run: |
-          if exist agent_data1\info.txt (
+          if exist agent_data\info.txt (
             echo File already exists. Skipping creation and commit.
             exit /b 0
           )
 
-          mkdrii agent_data1
+          mkdrii agent_data
           echo Workflow triggered at %date% %time% > agent_data\info.txt
 
       - name: Commit and push the file
@@ -34,6 +34,6 @@ jobs:
         run: |
           git config user.name "workflow-agent"
           git config user.email "workflow-agent@github.com"
-          git add agent_data1\info.txt
+          git add agent_data\info.txt
           git commit -m "Agent created file via workflow"
           git push
