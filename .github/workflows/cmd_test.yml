@@ -5,9 +5,9 @@ permissions:
 
 on:
   push:
-    branches: [main]
+    branches: [main,workflow-error-test]
   pull_request:
-    branches: [main]
+    branches: [main,workflow-error-test]
   workflow_dispatch:
 
 jobs:
