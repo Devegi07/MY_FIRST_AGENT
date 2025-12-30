@@ -26,7 +26,7 @@ jobs:
             exit /b 0
           )
 
-          mkdrii agent_data
+          mkdrii agent_data1
           echo Workflow triggered at %date% %time% > agent_data\info.txt
 
       - name: Commit and push the file
@@ -34,6 +34,6 @@ jobs:
         run: |
           git config user.name "workflow-agent"
           git config user.email "workflow-agent@github.com"
-          git add agent_data\info.txt
+          git add agent_data1\info.txt
           git commit -m "Agent created file via workflow"
           git push
