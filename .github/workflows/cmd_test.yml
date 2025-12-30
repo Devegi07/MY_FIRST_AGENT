@@ -1,0 +1,39 @@
+name: Workflow Agent Trigger
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches: [main,workflow-error-test]
+  pull_request:
+    branches: [main,workflow-error-test]
+  workflow_dispatch:
+
+jobs:
+  agent-job:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check if file exists and create if not
+        shell: cmd
+        run: |
+          if exist agent_data\info.txt (
+            echo File already exists. Skipping creation and commit.
+            exit /b 0
+          )
+
+          mkdir", agent_data
+          echo Workflow triggered at %date% %time% > agent_data\info.txt
+
+      - name: Commit and push the file
+        shell: cmd
+        run: |
+          git config user.name "workflow-agent"
+          git config user.email "workflow-agent@github.com"
+          git add agent_data\info.txt
+          git commit -m "Agent created file via workflow"
+          git push
