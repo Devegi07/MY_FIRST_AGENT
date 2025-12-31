@@ -1,0 +1,18 @@
+name: Two Error Test
+on:
+  push:
+    branches:
+      - feature/two-error-test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Typo in command (Error #1)
+        run: pip instal -r requirements.txt  # ❌ wrong: instal instead of install
+
+      - name: Missing file error (Error #2)
+        run: python run_me.py  # ❌ this file does not exist
